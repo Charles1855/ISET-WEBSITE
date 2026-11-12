@@ -1,0 +1,834 @@
+/* ==========================================================================
+   ISET — Integrative Sports-Education Trust
+   MOBILE & TABLET RESPONSIVE STYLESHEET (mobile.css)
+   ==========================================================================
+   This stylesheet covers dimensions and adaptations for the vast majority of
+   mobile phones, phablets, foldables, and tablets across iOS and Android ecosystems:
+
+   1. LARGE TABLETS & HYBRIDS (<= 1024px)
+      - Apple iPad Pro 12.9" (Portrait: 1024x1366)
+      - Apple iPad Pro 11" / iPad Air (Landscape: 1194x834 / 1024x768)
+      - Apple iPad 10.2" / 10.9" (Landscape: 1080x810)
+      - Samsung Galaxy Tab S8 / S9 / Ultra (Landscape)
+      - Microsoft Surface Pro (Portrait: 912x1368)
+
+   2. STANDARD TABLETS & UNFOLDED PHONES (<= 860px)
+      - Apple iPad 10th Gen (Portrait: 820x1180)
+      - Apple iPad Air (Portrait: 820x1180)
+      - Apple iPad Mini 6 (Portrait: 744x1133)
+      - Apple iPad 9.7" / 10.2" (Portrait: 768x1024 / 810x1080)
+      - Samsung Galaxy Tab A8 / S8 / S9 (Portrait: 800x1280)
+      - Google Pixel Tablet (Portrait: 800x1280)
+      - Samsung Galaxy Z Fold 4/5/6 (Unfolded: 768x960 to 816x960)
+
+   3. PHABLETS & LARGE MOBILE LANDSCAPE (<= 768px)
+      - 7-inch & 8-inch Android mini-tablets
+      - iPhone 14/15/16 Pro Max (Landscape: 844-932px)
+      - Samsung Galaxy S22/S23/S24 Ultra (Landscape: 915-960px)
+
+   4. STANDARD SMARTPHONES — PORTRAIT (<= 640px)
+      - Apple iPhone 14 / 15 / 16 Plus & Pro Max (428x926, 430x932)
+      - Apple iPhone 11 / XR / 8 Plus (414x896, 414x736)
+      - Samsung Galaxy S20/S21/S22/S23/S24+ & Ultra (412x915)
+      - Google Pixel 6 / 7 / 8 / 9 Pro (412x915, 448x996)
+      - OnePlus, Xiaomi, Oppo, Huawei flagship devices (390-440px)
+
+   5. COMPACT SMARTPHONES — PORTRAIT (<= 480px)
+      - Apple iPhone 12 / 13 / 14 / 15 / 16 base & Pro (390x844, 393x852)
+      - Apple iPhone X / XS / 11 Pro (375x812)
+      - Samsung Galaxy S21 / S22 / S23 / S24 base (360x780 to 390x844)
+      - Samsung Galaxy A-series (360x800 to 384x854)
+
+   6. NARROW SMARTPHONES & FOLDABLE COVERS (<= 360px & <= 320px)
+      - Apple iPhone SE (1st / 2nd / 3rd gen: 320x568, 375x667)
+      - Samsung Galaxy Z Fold 4 / 5 / 6 Cover Screen (320x892 to 344x904)
+      - Budget / ultra-compact mobile devices (280x653 to 320x640)
+
+   7. MOBILE LANDSCAPE ORIENTATION (max-height: 500px)
+      - Any smartphone held in horizontal / landscape orientation
+
+   8. TOUCH & SAFE-AREA SUPPORT
+      - Notched devices (iPhone X through 16 Pro Dynamic Island, Android notch)
+      - High-precision touch targets (min 44px)
+      - iOS input zoom prevention
+   ========================================================================== */
+
+/* ==========================================================================
+   GLOBAL TOUCH & MOBILE DEFAULTS
+   ========================================================================== */
+
+/* Fix iOS font zooming on form controls when focused */
+@media screen and (max-width: 1024px) {
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="password"],
+  input[type="number"],
+  select,
+  textarea {
+    font-size: 16px !important; /* iOS Safari forces zoom on font-size < 16px */
+  }
+}
+
+/* Ensure accessible minimum touch target sizes & tap interactions */
+@media (hover: none) and (pointer: coarse) {
+  .btn,
+  .nav-links a,
+  .link-card,
+  .footer-links a,
+  .nav-toggle {
+    -webkit-tap-highlight-color: rgba(227, 160, 56, 0.15);
+  }
+
+  .btn {
+    min-height: 48px;
+    padding: 0.85em 1.4em;
+  }
+
+  .nav-links a {
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+  }
+
+  .link-card {
+    min-height: 56px;
+  }
+
+  /* Prevent sticky hover effects on touchscreen devices */
+  .btn:hover {
+    transform: none;
+  }
+  .btn:active {
+    transform: scale(0.98);
+    opacity: 0.92;
+  }
+
+  .link-card:hover {
+    transform: none;
+    border-color: var(--line);
+  }
+  .link-card:active {
+    border-color: var(--pitch);
+    background: var(--paper-dim);
+  }
+}
+
+/* Safe area inset support (iPhone Notch, Dynamic Island, Home Indicator) */
+@supports (padding: max(0px)) {
+  .site-header {
+    padding-left: max(0px, env(safe-area-inset-left));
+    padding-right: max(0px, env(safe-area-inset-right));
+  }
+
+  .nav-links.is-open {
+    padding-top: max(1rem, env(safe-area-inset-top));
+    padding-bottom: max(2rem, env(safe-area-inset-bottom));
+    padding-left: max(1.5rem, env(safe-area-inset-left));
+    padding-right: max(1.5rem, env(safe-area-inset-right));
+  }
+
+  .site-footer {
+    padding-bottom: max(2rem, env(safe-area-inset-bottom));
+    padding-left: max(0px, env(safe-area-inset-left));
+    padding-right: max(0px, env(safe-area-inset-right));
+  }
+}
+
+/* Prevent accidental horizontal overflow caused by wide elements or long words */
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+.lede,
+.card p,
+.feature-row p,
+.founders-note p,
+.strip p {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+/* ==========================================================================
+   1. LARGE TABLETS & HYBRIDS (<= 1024px)
+   ========================================================================== */
+@media (max-width: 1024px) {
+  :root {
+    --container: 960px;
+    --gap: 1.5rem;
+  }
+
+  .container {
+    padding-inline: 2rem;
+  }
+
+  .section {
+    padding-block: 4.5rem;
+  }
+
+  /* Refined typography scale for tablet viewports */
+  h2.h-lg {
+    font-size: clamp(1.8rem, 3.5vw, 2.4rem);
+  }
+
+  .hero h1 {
+    font-size: clamp(2.1rem, 4vw, 3rem);
+  }
+
+  /* 3-column grids adjust gracefully to 2 columns on tablets */
+  .grid--3 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Allow 7th card in services or single odd card to bridge cleanly */
+  .grid--3 > .card:last-child:nth-child(2n + 1) {
+    grid-column: 1 / -1;
+  }
+
+  /* Partner grid proportions */
+  .partner-grid {
+    gap: 2.5rem;
+  }
+
+  /* Feature rows padding and media scale */
+  .feature-row {
+    gap: 2.5rem;
+    padding-block: 2.25rem;
+  }
+
+  .feature-media {
+    aspect-ratio: 16 / 11;
+  }
+
+  /* Footer grid on tablets */
+  .footer-grid {
+    grid-template-columns: 1.3fr 1fr 1fr 1.1fr;
+    gap: 2rem;
+  }
+}
+
+/* ==========================================================================
+   2. STANDARD TABLETS & UNFOLDED DEVICES (<= 860px)
+   ========================================================================== */
+@media (max-width: 860px) {
+  :root {
+    --gap: 1.25rem;
+  }
+
+  .container {
+    padding-inline: 1.5rem;
+  }
+
+  .section {
+    padding-block: 3.75rem;
+  }
+
+  /* Mobile Navigation Drawer Activation */
+  .nav-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    border-radius: var(--radius-sm);
+    background: transparent;
+    border: 1px solid var(--line);
+    cursor: pointer;
+    transition: background-color 0.2s, border-color 0.2s;
+  }
+
+  .nav-toggle:active,
+  .nav-toggle:focus-visible {
+    background: var(--paper-dim);
+    border-color: var(--navy);
+  }
+
+  .nav-links {
+    position: fixed;
+    top: 68px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 0;
+    visibility: hidden;
+    opacity: 0;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    flex-direction: column;
+    align-items: stretch;
+    background: var(--paper);
+    padding: 0 1.5rem;
+    gap: 0;
+    border-top: 1px solid var(--line);
+    box-shadow: 0 16px 32px rgba(16, 36, 32, 0.12);
+    transition: height 0.3s var(--ease), opacity 0.25s var(--ease), visibility 0.3s;
+    z-index: 99;
+  }
+
+  .nav-links.is-open {
+    height: calc(100dvh - 68px);
+    visibility: visible;
+    opacity: 1;
+    padding: 1.25rem 1.5rem 2.5rem;
+  }
+
+  .nav-links a {
+    width: 100%;
+    padding-block: 1rem;
+    border-bottom: 1px solid var(--line);
+    color: var(--navy);
+    font-size: 1.05rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    opacity: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .nav-links a::after {
+    display: none; /* remove desktop underline indicator */
+  }
+
+  .nav-links a[aria-current="page"] {
+    color: var(--pitch);
+    font-weight: 600;
+  }
+
+  .nav-links a[aria-current="page"]::after {
+    content: "●";
+    display: inline-block;
+    color: var(--gold);
+    font-size: 0.8rem;
+    position: static;
+    height: auto;
+    background: none;
+  }
+
+  .nav-cta {
+    margin: 1.5rem 0 0 0;
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+    padding-block: 0.95em;
+    font-size: 0.92rem;
+  }
+
+  /* Override inline 2-col styles in About section hero-grid */
+  .hero-grid,
+  .section > .hero-grid,
+  div.hero-grid[style*="grid-template-columns"],
+  .about-grid {
+    grid-template-columns: 1fr !important;
+    gap: 2rem;
+  }
+
+  /* Feature rows stack on tablets */
+  .feature-row,
+  .feature-row:nth-child(even) {
+    grid-template-columns: 1fr;
+    direction: ltr;
+    gap: 1.5rem;
+  }
+
+  .feature-media {
+    max-width: 100%;
+    aspect-ratio: 16 / 9;
+    max-height: 320px;
+  }
+
+  /* Partner / Donate section layout */
+  .partner-grid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  /* Footer layout */
+  .footer-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2.25rem 1.5rem;
+  }
+}
+
+/* ==========================================================================
+   3. PHABLETS & MOBILE LANDSCAPE (<= 768px)
+   ========================================================================== */
+@media (max-width: 768px) {
+  .section {
+    padding-block: 3.25rem;
+    scroll-margin-top: 72px;
+  }
+
+  .hero {
+    padding-block: 2.5rem 2rem;
+    scroll-margin-top: 72px;
+  }
+
+  /* Hero pitch illustration responsiveness */
+  .pitch-page {
+    max-width: 480px;
+    margin-inline: auto;
+    margin-top: 0.5rem;
+  }
+
+  /* Philosophy Strip */
+  .strip-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding-block: 1.4rem;
+  }
+
+  .strip p {
+    font-size: 1.15rem;
+    line-height: 1.4;
+  }
+
+  /* Link list: stacked or comfortable cards */
+  .link-list {
+    grid-template-columns: 1fr;
+    gap: 0.85rem;
+  }
+
+  .link-card {
+    padding: 1rem 1.2rem;
+  }
+
+  /* Target group headings */
+  .feature-row h3.h-lg {
+    font-size: 1.65rem;
+    margin-bottom: 0.6em;
+  }
+}
+
+/* ==========================================================================
+   4. STANDARD SMARTPHONES — PORTRAIT (<= 640px)
+   ========================================================================== */
+@media (max-width: 640px) {
+  /* All multi-column grids collapse to clean single-column cards */
+  .grid--3,
+  .grid--2 {
+    grid-template-columns: 1fr !important;
+    gap: 1.15rem;
+  }
+
+  .grid--3 > .card:last-child:nth-child(2n + 1) {
+    grid-column: auto;
+  }
+
+  /* Button rows fill width for easy single-thumb tapping */
+  .btn-row {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    gap: 0.75rem;
+  }
+
+  .btn-row .btn {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+  }
+
+  /* Card internal padding */
+  .card {
+    padding: 1.35rem 1.25rem;
+  }
+
+  .card-icon {
+    width: 42px;
+    height: 42px;
+    margin-bottom: 0.85rem;
+  }
+
+  /* Stat numbers */
+  .stat-card .stat-num {
+    font-size: 2.6rem;
+  }
+
+  /* Founders callout box */
+  .founders-note {
+    padding: 1.25rem;
+    margin-bottom: 2rem;
+  }
+
+  /* Trustee cards */
+  .trustee-head {
+    gap: 0.75rem;
+  }
+
+  .trustee-avatar {
+    width: 48px;
+    height: 48px;
+    font-size: 1rem;
+  }
+
+  .trustee-name {
+    font-size: 1rem;
+  }
+
+  .trustee-role {
+    font-size: 0.68rem;
+  }
+
+  /* Ways to partner items */
+  .way {
+    padding: 0.85rem 0;
+    gap: 0.75rem;
+  }
+
+  .way-icon {
+    width: 34px;
+    height: 34px;
+  }
+
+  .way-icon svg {
+    width: 17px;
+    height: 17px;
+  }
+
+  /* Partner form card */
+  .form-card {
+    padding: 1.35rem 1.15rem;
+    border-radius: var(--radius-sm);
+  }
+
+  .field {
+    margin-bottom: 0.95rem;
+  }
+
+  .field label {
+    font-size: 0.7rem;
+    margin-bottom: 0.35em;
+  }
+
+  .field input,
+  .field select,
+  .field textarea {
+    padding: 0.7em 0.8em;
+  }
+
+  /* Footer stack */
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .site-footer p {
+    max-width: 100%;
+  }
+
+  /* CTA Banner on subpages */
+  .cta-banner {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 1.75rem 1.25rem;
+    gap: 1.25rem;
+  }
+
+  .cta-banner .btn {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+    margin-top: 2rem;
+    padding-top: 1.25rem;
+  }
+}
+
+/* ==========================================================================
+   5. COMPACT SMARTPHONES — PORTRAIT (<= 480px)
+   ========================================================================== */
+@media (max-width: 480px) {
+  :root {
+    --radius: 12px;
+  }
+
+  .container {
+    padding-inline: 1.15rem;
+  }
+
+  .section {
+    padding-block: 2.75rem;
+  }
+
+  /* Brand mark in header */
+  .brand {
+    gap: 0.55rem;
+  }
+
+  .brand img {
+    height: 38px;
+  }
+
+  .brand-word {
+    font-size: 1rem;
+  }
+
+  .brand-word small {
+    font-size: 0.56rem;
+    letter-spacing: 0.1em;
+  }
+
+  /* Hero headline and lede */
+  .hero h1 {
+    font-size: 1.85rem;
+    line-height: 1.12;
+    margin-bottom: 0.7em;
+  }
+
+  .hero .lede {
+    font-size: 1rem;
+    line-height: 1.5;
+    margin-bottom: 1.5em;
+  }
+
+  /* Section heads */
+  .section-head {
+    margin-bottom: 1.75rem;
+  }
+
+  h2.h-lg {
+    font-size: 1.65rem;
+    line-height: 1.16;
+  }
+
+  h3.h-md {
+    font-size: 1.2rem;
+    line-height: 1.25;
+  }
+
+  .lede {
+    font-size: 0.98rem;
+  }
+
+  /* Eyebrow styling */
+  .eyebrow {
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    gap: 0.5em;
+  }
+
+  .eyebrow::before {
+    width: 20px;
+  }
+
+  /* Feature media aspect ratio */
+  .feature-media {
+    aspect-ratio: 16 / 10;
+  }
+
+  .feature-media .tag {
+    font-size: 0.65rem;
+    bottom: 0.75rem;
+    left: 0.75rem;
+  }
+
+  /* Useful links card */
+  .link-card {
+    padding: 0.9rem 1rem;
+  }
+
+  .link-card .name {
+    font-size: 0.9rem;
+  }
+
+  .link-card .url {
+    font-size: 0.76rem;
+  }
+
+  /* Footer links touch padding */
+  .footer-links li {
+    margin-bottom: 0.85rem;
+  }
+
+  .footer-links a {
+    display: inline-block;
+    padding-block: 0.15rem;
+  }
+}
+
+/* ==========================================================================
+   6. NARROW SMARTPHONES & FOLDABLE COVERS (<= 360px & <= 320px)
+   ========================================================================== */
+@media (max-width: 360px) {
+  .container {
+    padding-inline: 0.9rem;
+  }
+
+  /* Micro adjustments for brand to prevent wrapping or crowding */
+  .brand img {
+    height: 34px;
+  }
+
+  .brand-word {
+    font-size: 0.92rem;
+  }
+
+  .brand-word small {
+    font-size: 0.5rem;
+    letter-spacing: 0.06em;
+  }
+
+  .nav-toggle {
+    width: 40px;
+    height: 40px;
+  }
+
+  /* Typography scale */
+  .hero h1 {
+    font-size: 1.6rem;
+  }
+
+  h2.h-lg {
+    font-size: 1.45rem;
+  }
+
+  h3.h-md {
+    font-size: 1.1rem;
+  }
+
+  .stat-card .stat-num {
+    font-size: 2.2rem;
+  }
+
+  .card {
+    padding: 1.1rem 0.95rem;
+  }
+
+  .form-card {
+    padding: 1.15rem 0.9rem;
+  }
+
+  .btn {
+    font-size: 0.8rem;
+    padding: 0.85em 1.1em;
+  }
+}
+
+@media (max-width: 320px) {
+  .container {
+    padding-inline: 0.75rem;
+  }
+
+  .hero h1 {
+    font-size: 1.45rem;
+  }
+
+  .brand-word small {
+    display: none; /* Hide subtitle on extreme narrow screens to prevent overlap */
+  }
+
+  .pitch-page {
+    max-width: 280px;
+  }
+
+  .stat-card .stat-num {
+    font-size: 1.9rem;
+  }
+}
+
+/* ==========================================================================
+   7. MOBILE LANDSCAPE ORIENTATION (max-height: 500px)
+   ========================================================================== */
+@media (max-height: 500px) and (orientation: landscape) {
+  .section {
+    padding-block: 2.5rem;
+    scroll-margin-top: 60px;
+  }
+
+  .hero {
+    padding-block: 2rem 1.5rem;
+    scroll-margin-top: 60px;
+  }
+
+  .hero-grid {
+    grid-template-columns: 1.1fr 0.9fr !important;
+    gap: 1.5rem;
+    align-items: center;
+  }
+
+  .hero h1 {
+    font-size: clamp(1.4rem, 4vw, 1.85rem);
+    margin-bottom: 0.4em;
+  }
+
+  .hero .lede {
+    font-size: 0.92rem;
+    margin-bottom: 1em;
+  }
+
+  .btn-row {
+    flex-direction: row;
+  }
+
+  .btn-row .btn {
+    width: auto;
+    padding: 0.65em 1.1em;
+    font-size: 0.76rem;
+  }
+
+  .pitch-page {
+    max-height: 220px;
+    width: auto;
+    margin-inline: auto;
+  }
+
+  .nav-links.is-open {
+    top: 56px;
+    height: calc(100dvh - 56px);
+    padding-block: 0.75rem 1.5rem;
+  }
+
+  .nav-links a {
+    padding-block: 0.6rem;
+    font-size: 0.92rem;
+  }
+
+  .nav-cta {
+    margin: 0.75rem 0 0 0;
+    padding-block: 0.6em;
+  }
+}
+
+/* ==========================================================================
+   8. PRINT & ACCESSIBILITY OPTIMIZATIONS
+   ========================================================================== */
+@media print {
+  .site-header,
+  .nav-toggle,
+  .nav-cta,
+  .pitch-page,
+  .partner-grid .form-card,
+  .site-footer {
+    display: none !important;
+  }
+
+  body {
+    background: #fff;
+    color: #000;
+    font-size: 12pt;
+  }
+
+  .container {
+    max-width: 100%;
+    padding: 0;
+  }
+
+  .card {
+    border: 1px solid #ccc;
+    box-shadow: none;
+    page-break-inside: avoid;
+  }
+
+  .feature-row {
+    page-break-inside: avoid;
+  }
+}
